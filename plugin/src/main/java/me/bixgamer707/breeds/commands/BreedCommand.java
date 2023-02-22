@@ -89,6 +89,7 @@ public class BreedCommand implements CommandExecutor, TabCompleter {
                 }
 
                 user.addBreed(breed);
+                player.sendMessage(textHandler.colorizeMessages("Messages.breed-added", plugin.getMessages().getLang(), player));
                 break;
             }
             case "remove": {

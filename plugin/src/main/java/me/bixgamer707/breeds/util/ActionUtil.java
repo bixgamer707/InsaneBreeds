@@ -17,16 +17,18 @@ public class ActionUtil {
     public static void execute(String action, Player player){
         TextHandler textHandler = InsaneBreeds.getInstance().getTextHandler();
         YamlFile messages = InsaneBreeds.getInstance().getMessages().getLang();
+
+        if(action.equalsIgnoreCase("close")){
+            player.closeInventory();
+            player.sendMessage(textHandler.colorizeMessages("close-inventory", messages, player));
+            return;
+        }
+
         String[] split = action.split(":");
 
         String key = split[0];
 
         switch (split[0].toLowerCase(Locale.ROOT)){
-            case "close": {
-                player.closeInventory();
-                player.sendMessage(textHandler.colorizeMessages("close-inventory", messages, player));
-                break;
-            }
             case "open": {
                 if(!(split.length > 1)){
                     InsaneBreeds.getInstance().getLogger().warning("The action "+key+" requires a parameter!");
@@ -45,7 +47,7 @@ public class ActionUtil {
                 }
                 String[] sound = split[1].split(",");
 
-                if(sound.length < 2){
+                if(!(sound.length > 2)){
                     InsaneBreeds.getInstance().getLogger().warning("The action "+key+" requires a parameter!");
                     return;
                 }

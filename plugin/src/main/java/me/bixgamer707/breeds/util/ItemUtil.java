@@ -18,11 +18,11 @@ import java.util.List;
 public class ItemUtil {
 
     public static ItemStack getItemCustom(YamlFile yamlFile, String path, TextHandler textHandler, Player player){
-        if(!yamlFile.get().contains(path) || yamlFile.get().getString(path) == null) {
+        if(!yamlFile.get().contains(path+".hook") || yamlFile.get().getString(path+".hook") == null) {
             return getItem(yamlFile, path, textHandler);
         }
 
-        String[] split = yamlFile.get().getString(path).split(":");
+        String[] split = yamlFile.get().getString(path+".hook").split(":");
 
         if(!(split.length > 0)){
             return getItem(yamlFile, path, textHandler);
@@ -69,7 +69,7 @@ public class ItemUtil {
         ItemStack item = new ItemStack(Material.BARRIER);
 
         if(yamlFile.get().contains(path + ".material")){
-            item = new ItemStack(Material.valueOf(yamlFile.get().getString(path + ".material")));
+            item.setType(Material.matchMaterial(yamlFile.get().getString(path + ".material")));
         }
 
         ItemMeta meta = item.getItemMeta();
@@ -105,8 +105,8 @@ public class ItemUtil {
             }
         }
 
-        if(yamlFile.get().contains(path + ".custom")){
-            meta.setCustomModelData(yamlFile.get().getInt(path + ".custom"));
+        if(yamlFile.get().contains(path + ".custom-data")){
+            meta.setCustomModelData(yamlFile.get().getInt(path + ".custom-data"));
         }
 
         item.setItemMeta(meta);

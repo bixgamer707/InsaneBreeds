@@ -48,7 +48,7 @@ public class MenuFiles extends MenuBuilder {
 
             List<String> actions =
                     guis.get().contains("Guis." + id + ".items." + slot + ".actions-click") ?
-                            guis.get().getStringList("Guis." + id + ".items." + slot + ".actions") : new ArrayList<>(1);
+                            guis.get().getStringList("Guis." + id + ".items." + slot + ".actions-click") : new ArrayList<>(1);
 
             actions.forEach(action -> ActionUtil.execute(action, player));
         }

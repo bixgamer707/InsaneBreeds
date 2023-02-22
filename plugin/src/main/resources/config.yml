@@ -6,8 +6,60 @@ Settings:
     id: "select-breed" #Key of the gui in the config file (this)
     delay: 5 #This option is in ticks
 
-  skycoins:
-    enable: false
-    #Set enabled if you use SkyCoins
-    #Set disabled if you don't use SkyCoins
+Guis:
+  "select-breed":
+    title: "&6&lSelect breed"
+    type: "HOPPER" #HOPPER, CHEST, DISPENSER, DROPPER, FURNACE, CRAFTING, ENCHANTING, BREWING, MERCHANT, BEACON, ANVIL, HOPPER, SHULKER_BOX
+    #If you don't use a type inventory, you can use the size option
+    #size: 9
+    items:
+      "0":
+        material: "DIAMOND_SWORD" #Material of the item
+        name: "&x&f&b&4&5&4&5&nᴅ&x&f&b&4&e&4&e&nᴇ&x&f&c&5&6&5&6&nᴍ&x&f&c&5&f&5&f&nᴏ&x&f&c&6&7&6&7&nɴ&x&f&d&7&0&7&0&nɪ&x&f&d&7&8&7&8&nᴏ" #Name of the item
+        lore:
+          - "&7Click to select this breed"
+        actions-click:
+          - "breed:demon"
+          - "sound:ENTITY_PLAYER_LEVELUP,10,2"
+          - "close"
+        #You can use the actions-click option to execute commands, sounds, close the inventory, etc.
+        #example:
+        #command_console:say hello | command_console:<LINE_COMMAND>
+        #command_player:me hello | command_player:<LINE_COMMAND>
+        #sound:ENTITY_PLAYER_LEVELUP,10,2 | sound:<SOUND>,<VOLUME>,<PITCH>
+        #close | close
+        #open:select-breed | open:<GUI_ID>
+        #breed:demon | breed:<BREED_ID>
+        #message:Hello | message:<MESSAGE>
+        #message_file:Messages.test | message_file:<PATH>
+        #broadcast:Hello | broadcast:<MESSAGE>
+      "2":
+        material: "FIRE_CHARGE"
+        name: "Breed 2"
+        lore:
+          - "&7Click to select this breed"
+        custom-data: 1 #Custom data of the item
+        amount: 1 #Amount of the item
+        enchantments: #Enchantments of the item
+          - "DAMAGE_ALL:1"
+        flags: #Flags of the item
+          - "HIDE_ENCHANTS"
+        actions-click:
+          - "breed:breed2"
+          - "sound:ENTITY_PLAYER_LEVELUP,10,2"
+          - "close"
+      "4":
+        hook: "ia:insanebreeds_breed_item" #Hook of the item
+        #Hook with ItemsAdder or Oraxen (or = oraxen | ia = itemsadder)
+        #example:
+        #hook: "ia:insanebreeds_breed_item" | "<IDENTIFIER_PLUGIN>:<ID_ITEM>
+        #hook: "or:insane_breeds_breed_item" | "<IDENTIFIER_PLUGIN>:<ID_ITEM>
+        actions-click:
+          - "breed:breed3"
+          - "sound:ENTITY_PLAYER_LEVELUP,10,2"
+          - "close"
+
+
+
+
 
