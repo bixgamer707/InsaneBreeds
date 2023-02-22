@@ -1,6 +1,8 @@
 package me.bixgamer707.breeds.util;
 
 import me.bixgamer707.breeds.InsaneBreeds;
+import me.bixgamer707.breeds.breed.Breed;
+import me.bixgamer707.breeds.breed.user.User;
 import me.bixgamer707.breeds.file.YamlFile;
 import me.bixgamer707.breeds.menu.MenuFiles;
 import me.bixgamer707.breeds.text.TextHandler;
@@ -99,6 +101,31 @@ public class ActionUtil {
                 }
 
                 Bukkit.getOnlinePlayers().forEach(onlinePlayer -> onlinePlayer.sendMessage(textHandler.colorize(split[1].replaceAll("%player%", player.getName()), onlinePlayer)));
+                break;
+            }
+            case "breed": {
+                if(!(split.length > 1)){
+                    InsaneBreeds.getInstance().getLogger().warning("The action "+key+" requires a parameter!");
+                    return;
+                }
+
+                String breedName = split[1];
+
+                Breed breed = InsaneBreeds.getInstance().getBreedManager().getBreed(breedName);
+
+                if(breed == null){
+                    InsaneBreeds.getInstance().getLogger().warning("The breed "+breedName+" does not exist!");
+                    return;
+                }
+
+                User user = InsaneBreeds.getInstance().getUserManager().getUser(player.getUniqueId());
+
+                if(user == null){
+                    InsaneBreeds.getInstance().getLogger().warning("The user for "+player.getName()+" does not exist!");
+                    return;
+                }
+
+                user.addBreed(breed);
                 break;
             }
             default: {

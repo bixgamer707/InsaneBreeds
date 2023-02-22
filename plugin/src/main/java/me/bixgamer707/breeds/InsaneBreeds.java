@@ -2,6 +2,7 @@ package me.bixgamer707.breeds;
 
 import me.bixgamer707.breeds.breed.manager.BreedManager;
 import me.bixgamer707.breeds.breed.user.manager.UserManager;
+import me.bixgamer707.breeds.commands.BreedCommand;
 import me.bixgamer707.breeds.commands.MainCommand;
 import me.bixgamer707.breeds.file.Messages;
 import me.bixgamer707.breeds.file.YamlFile;
@@ -43,6 +44,8 @@ public class InsaneBreeds extends JavaPlugin {
 
         getCommand("insanebreeds").setExecutor(new MainCommand(this));
         getCommand("insanebreeds").setTabCompleter(new MainCommand(this));
+        getCommand("breeds").setExecutor(new BreedCommand(this));
+        getCommand("breeds").setTabCompleter(new BreedCommand(this));
 
         this.breedManager.loadBreeds(breeds);
         this.userManager.loadUsers(users);

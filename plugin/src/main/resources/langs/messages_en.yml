@@ -1,0 +1,4 @@
+Messages:
+  no-permission: "%prefix% You do not have permission to this."
+  reload: "%prefix% Reloaded the config."
+  no-console: "%prefix% You can't use this command from console."

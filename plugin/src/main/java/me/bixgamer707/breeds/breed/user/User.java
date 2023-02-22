@@ -3,7 +3,12 @@ package me.bixgamer707.breeds.breed.user;
 import me.bixgamer707.breeds.breed.Breed;
 import me.bixgamer707.breeds.breed.user.data.Points;
 import me.bixgamer707.breeds.breed.user.data.Stats;
+import me.bixgamer707.breeds.breed.user.events.UserAddBreedEvent;
+import me.bixgamer707.breeds.breed.user.events.UserAddStatEvent;
+import me.bixgamer707.breeds.breed.user.events.UserRemoveBreedEvent;
 import me.bixgamer707.breeds.user.Data;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -42,19 +47,71 @@ public class User {
     }
 
     public void addBreed(Breed breed){
+        Player player = Bukkit.getPlayer(uuid);
+
+        if(player == null){
+            return;
+        }
+
+        UserAddBreedEvent event = new UserAddBreedEvent(player, breed);
+
+        Bukkit.getPluginManager().callEvent(event);
+
+        if(event.isCancelled()){
+            return;
+        }
+
         breedMap.put(breed.getUuid(), breed);
     }
 
     public void removeBreed(Breed breed){
+        Player player = Bukkit.getPlayer(uuid);
+
+        if(player == null){
+            return;
+        }
+
+        UserRemoveBreedEvent event = new UserRemoveBreedEvent(player, breed);
+
+        Bukkit.getPluginManager().callEvent(event);
+
+        if(event.isCancelled()){
+            return;
+        }
+
         breedMap.remove(breed.getUuid());
     }
 
     public void removeBreed(UUID uuid){
+        Player player = Bukkit.getPlayer(uuid);
+
+        if(player == null){
+            return;
+        }
+
+        Breed breed = getBreed(uuid);
+
+        if(breed == null){
+            return;
+        }
+
+        UserRemoveBreedEvent event = new UserRemoveBreedEvent(player, breed);
+
+        Bukkit.getPluginManager().callEvent(event);
+
+        if(event.isCancelled()){
+            return;
+        }
+
         breedMap.remove(uuid);
     }
 
     public Breed getBreed(UUID uuid){
         return breedMap.get(uuid);
+    }
+
+    public boolean hasBreed(UUID uuid){
+        return breedMap.containsKey(uuid);
     }
 
     public Map<String, Data<Integer>> getStats(){
@@ -72,11 +129,25 @@ public class User {
     public void addStat(String statName, Integer value){
         Data<Integer> stat = stats.get(statName);
 
-        if(stat == null){
-            stats.put(statName, new Stats(value));
+        Player player = Bukkit.getPlayer(getUuid());
+
+        if(player == null){
             return;
         }
 
-        stat.add(value);
+        UserAddStatEvent event = new UserAddStatEvent(player, statName, value);
+
+        Bukkit.getPluginManager().callEvent(event);
+
+        if(event.isCancelled()){
+            return;
+        }
+
+        if(stat == null){
+            setStat(statName, value);
+            return;
+        }
+
+        stat.add(event.getValue());
     }
 }

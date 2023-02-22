@@ -11,3 +11,6 @@ commands:
   insanebreeds:
     description: InsaneBreeds main command.
     aliases: [ib]
+  breeds:
+    description: Breeds main command.
+    aliases: [breed]

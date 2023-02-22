@@ -9,7 +9,6 @@ import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.bukkit.util.StringUtil;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -29,7 +28,7 @@ public class MainCommand implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] args) {
         if(!(commandSender instanceof Player player)){
-            commandSender.sendMessage("Only players can execute this command");
+            commandSender.sendMessage(textHandler.colorizeMessages("Messages.no-console", plugin.getMessages().getLang()));
             return true;
         }
 
@@ -43,9 +42,13 @@ public class MainCommand implements CommandExecutor, TabCompleter {
                 plugin.reload();
                 player.sendMessage(textHandler.colorizeMessages("Messages.reload", plugin.getMessages().getLang(), player));
                 break;
-            default:
-                player.sendMessage(textHandler.colorizeMessages("Messages.help", plugin.getMessages().getLang(), player));
+            default: {
+                List<String> help = plugin.getMessages().getLang().get().getStringList("Messages.help");
+
+                player.sendMessage(textHandler.colorizeList(help, player).toString());
                 break;
+            }
+
         }
         return true;
     }
