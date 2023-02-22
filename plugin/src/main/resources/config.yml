@@ -1,0 +1,13 @@
+Settings:
+  prefix: '&8[&6&lPlugin&8] &7'
+  messages: "messages_en.yml"
+  gui:
+    send-on-join: true
+    id: "select-breed" #Key of the gui in the config file (this)
+    delay: 5 #This option is in ticks
+
+  skycoins:
+    enable: false
+    #Set enabled if you use SkyCoins
+    #Set disabled if you don't use SkyCoins
+

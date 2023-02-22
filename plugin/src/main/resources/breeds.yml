@@ -1,0 +1,9 @@
+Breeds:
+  demon:
+    color: 16711680 # Red
+    displayname: "&x&f&b&4&5&4&5&nᴅ&x&f&b&4&e&4&e&nᴇ&x&f&c&5&6&5&6&nᴍ&x&f&c&5&f&5&f&nᴏ&x&f&c&6&7&6&7&nɴ&x&f&d&7&0&7&0&nɪ&x&f&d&7&8&7&8&nᴏ"
+    multipliers:
+      strength: 1
+      speed: 1
+      health: 1
+      resistance: 1

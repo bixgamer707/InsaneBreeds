@@ -1,0 +1,13 @@
+name: InsaneBreeds
+main: me.bixgamer707.breeds.InsaneBreeds
+version: 1.0
+api-version: 1.13
+authors: [bixgamer707]
+description: Breeds plugin for minecraft.
+website: https://github.com/bixgamer707/InsaneBreeds
+softdepend: [ PlaceholderAPI, Oraxen, ItemsAdder ]
+
+commands:
+  insanebreeds:
+    description: InsaneBreeds main command.
+    aliases: [ib]
