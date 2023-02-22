@@ -1,4 +1,4 @@
-# PLUGIN NAME
+# InsaneBreeds
 
 
 > Basic use
